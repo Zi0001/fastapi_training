@@ -11,7 +11,6 @@ app = FastAPI()
 # app = FastAPI(docs_url=None, redoc_url=None) 
 
 
-
 class EducationLevel(str, Enum):
     # Укажем значения с большой буквы, чтобы они хорошо смотрелись 
     # в документации Swagger.
@@ -33,7 +32,7 @@ def hello_author():
 def greetings(
         *,
         name: str = Path(..., min_length=2, max_length=20),
-        age: Optional[int] = None,
+        age: Optional[int] = Query(None, gt=4, le=99),
         is_staff: bool = False,
         education_level: Optional[EducationLevel] = None,
         surname: str = Query(..., min_length=2, max_length=50),
